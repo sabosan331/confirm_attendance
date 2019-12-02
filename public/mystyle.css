@@ -1,0 +1,22 @@
+html {
+  background-color: #fff;
+  color: #273849;
+  font-size: 120%;
+}  
+div {
+  margin: 20px auto;
+  width: 50%;
+  background-color: #F8F8F8;
+  padding: 10px;
+  box-shadow: 0 0 3px gray;
+}
+td {
+  padding:10px;
+}
+table {
+  border-collapse: collapse;
+  border: solid 2px #323f4d;
+}
+table th, table td {
+  border: solid 1px #323f4d;
+} 

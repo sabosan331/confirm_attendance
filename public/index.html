@@ -1,0 +1,69 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+
+<div id="app">
+    <h3>Bonenkai Attendance</h3>
+  <table>
+    <tr>
+      <td></td>
+      <td>12/12</td>
+      <td>12/13</td>
+      <td>attendance</td>
+    </tr>
+    <tr v-for="item in items">
+      <td>{{item.name}}</td>
+      <td>
+          <input
+            input type="checkbox"
+            v-model="item.day1"
+            v-on:change="change_attendance(item)">
+      </td>
+      <td>
+          <input 
+          input type="checkbox" 
+          v-model="item.day2" 
+          v-on:change="change_attendance(item)">
+      </td>
+      <td v-if="item.day1 === true || item.day2 === true">○</td>
+      <td v-else>×</td>
+    </tr>
+
+  </table>
+
+</div> 
+
+<script>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    items: [],
+    count: "###"
+  },
+  methods: {
+
+    change_attendance : function(item){
+
+      axios.post('/change_information', item ).then( res => {
+        
+        Object.assign(item,res.data) // overwrite by res.data
+        console.log(item)
+      });
+
+    },
+
+
+  },
+  mounted(){
+    axios.get('/onload', {}).then( res => {
+        
+        app.items = res.data;
+        console.log(app.items);
+
+    });
+
+  }
+})
+
+</script>
